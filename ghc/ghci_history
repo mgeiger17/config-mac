@@ -1,0 +1,55 @@
+(/) ((-) 4 ((*) 9 3)) 4
+(/) 8 7
+(/) (-) 4 (*) 9 3 4
+(/) (-) 4 (*) 9 3 (4)
+(/) (-) 4 (*) 9 3 (-4)
+-(4,4)
+-(4,*(9,3))
+/(-(4,*(9,3)),(-4))
+-(-(4,*(9,3)),-(4))
+4**4
+/(-(4,*(9,3)),-(4))
+/(-(4,*(9,3)),(-4))
+:(-(4,*(9,3)),(-4))
+/(-(4,*(9,3)),(-4))
+quit
+sum(reverse [0..100])
+sum(reverse [0..50])
+sumd(reverse [0..50])
+[40..0]
+:q
+:}
+less100 = 100 > value
+less100 :: Double -> Bool
+positive value = value > 0
+positive :: Double -> Bool
+:{ 
+check 3
+:}
+check rule1 rule2 value = rule1 value && rule2 value
+check :: (Double -> Bool) -> (Double -> Bool) -> Double -> Bool
+:{
+:}
+check rule1 rule2 value = rule1 ( rule2 value)
+check :: (Double -> Bool) -> (Double -> Bool) -> Double -> Bool
+:{
+:}
+check rule1 rule2 value = rule1.rule2 value
+check->(double->bol)->(double->bol)->double->bol
+:{
+:t volCylinderR12
+volCylinderR12 = volCylinder 12
+volCylinder h r = (pi :: Double) * (r ** 2) * h
+:t volStdBall
+volStdBall = volBall 10
+:t volBall
+volBall r = 4/3 * (pi :: Double) * (r ** 3)
+volBall r = 4/3 ∗ (pi :: Double) ∗ (r ∗ ∗ 3)
+:t cost
+:t
+cost vol priceFun = (priceFun (vol*(10:: Double))) + (10:: Float)
+:t cost
+cost vol priceFun = (priceFun (vol∗(10:: Double))) + (10:: Float)
+:q
+nvim start.hs
+nvim start.zhs
