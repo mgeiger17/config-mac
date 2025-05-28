@@ -1,28 +1,44 @@
 return {
-  -- LSPConfig für mehrere Sprachen (Java etc.)
+  -- Nur Java/JDTLS Setup bleibt hier
   {
     'neovim/nvim-lspconfig',
     dependencies = {
       'mfussenegger/nvim-jdtls',
     },
     config = function()
-      local lspconfig = require 'lspconfig'
       local jdtls = require 'jdtls'
       local jdtls_setup = require 'jdtls.setup'
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-      -- Autocommand für Java
       vim.api.nvim_create_autocmd('FileType', {
         pattern = 'java',
         callback = function()
-          local root_markers = { '.git', 'mvnw', 'gradlew', 'pom.xml', 'build.gradle' }
+          local root_markers = { '.git', 'mvnw', 'gradlew', 'pom.xml', 'build.gradle', 'src' }
           local root_dir = jdtls_setup.find_root(root_markers)
           if not root_dir then
             return
           end
 
+          local home = os.getenv 'HOME'
+          local jdtls_path = home .. '/.local/share/eclipse.jdt.ls'
+          local launcher_jar = vim.fn.glob(jdtls_path .. '/plugins/org.eclipse.equinox.launcher_*.jar')
+
           jdtls.start_or_attach {
-            cmd = { 'jdtls' },
+            cmd = {
+              '/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home/bin/java',
+              '-Declipse.application=org.eclipse.jdt.ls.core.id1',
+              '-Dosgi.bundles.defaultStartLevel=4',
+              '-Declipse.product=org.eclipse.jdt.ls.core.product',
+              '-Dlog.protocol=true',
+              '-Dlog.level=ALL',
+              '-Xmx1G',
+              '-jar',
+              launcher_jar,
+              '-configuration',
+              jdtls_path .. '/config_mac', -- <-- wichtig für macOS
+              '-data',
+              home .. '/.cache/jdtls-workspace',
+            },
             root_dir = root_dir,
             capabilities = capabilities,
             settings = {
@@ -31,12 +47,10 @@ return {
           }
         end,
       })
-
-      -- Entfernt: lspconfig.tsserver.setup → wird ersetzt durch typescript-tools.nvim
     end,
   },
 
-  -- TypeScript/JavaScript über typescript-tools.nvim (tsserver-Nachfolger)
+  -- typescript-tools übernimmt tsserver
   {
     'pmizio/typescript-tools.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
