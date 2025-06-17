@@ -1,10 +1,94 @@
 return {
-  -- Nur Java/JDTLS Setup bleibt hier
+  -- Hauptmodul: LSPConfig + Mason + alle allgemeinen Server
   {
     'neovim/nvim-lspconfig',
     dependencies = {
-      'mfussenegger/nvim-jdtls',
+      'williamboman/mason.nvim',
+      'williamboman/mason-lspconfig.nvim',
+      'hrsh7th/cmp-nvim-lsp',
     },
+    config = function()
+      local lspconfig = require 'lspconfig'
+      local mason = require 'mason'
+      local mason_lspconfig = require 'mason-lspconfig'
+
+      mason.setup()
+      mason_lspconfig.setup {
+        ensure_installed = {
+          'pyright',
+          'rust_analyzer',
+          'clangd',
+          'hls',
+          'lua_ls',
+        },
+      }
+
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+      mason_lspconfig.setup_handlers {
+        function(server_name)
+          lspconfig[server_name].setup {
+            capabilities = capabilities,
+          }
+        end,
+
+        -- Spezialkonfigurationen
+
+        ['pyright'] = function()
+          local function get_python_path()
+            local cwd = vim.fn.getcwd()
+            local paths = {
+              cwd .. '/.venv/bin/python3', -- Linux/macOS
+              cwd .. '/.venv/bin/python', -- fallback macOS (manchmal ohne 3)
+              cwd .. '\\.venv\\Scripts\\python.exe', -- Windows
+            }
+            for _, path in ipairs(paths) do
+              if vim.fn.executable(path) == 1 then
+                return path
+              end
+            end
+            return 'python3' -- fallback global python3
+          end
+
+          lspconfig.pyright.setup {
+            capabilities = capabilities,
+            settings = {
+              python = {
+                analysis = {
+                  typeCheckingMode = 'basic',
+                  autoSearchPaths = true,
+                  useLibraryCodeForTypes = true,
+                },
+              },
+            },
+            before_init = function(_, config)
+              config.settings.python.pythonPath = get_python_path()
+            end,
+          }
+        end,
+
+        ['rust_analyzer'] = function()
+          lspconfig.rust_analyzer.setup {
+            capabilities = capabilities,
+            settings = {
+              ['rust-analyzer'] = {
+                cargo = { allFeatures = true },
+                checkOnSave = {
+                  command = 'clippy',
+                },
+              },
+            },
+          }
+        end,
+      }
+    end,
+  },
+
+  -- Spezielle Java-Integration mit nvim-jdtls
+  {
+    'neovim/nvim-lspconfig',
+    dependencies = { 'mfussenegger/nvim-jdtls' },
+    ft = { 'java' },
     config = function()
       local jdtls = require 'jdtls'
       local jdtls_setup = require 'jdtls.setup'
@@ -35,7 +119,7 @@ return {
               '-jar',
               launcher_jar,
               '-configuration',
-              jdtls_path .. '/config_mac', -- <-- wichtig für macOS
+              jdtls_path .. '/config_mac',
               '-data',
               home .. '/.cache/jdtls-workspace',
             },
@@ -50,7 +134,7 @@ return {
     end,
   },
 
-  -- typescript-tools übernimmt tsserver
+  -- TypeScript & JavaScript: typescript-tools statt tsserver
   {
     'pmizio/typescript-tools.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
