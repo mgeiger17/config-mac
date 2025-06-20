@@ -170,6 +170,11 @@ cmd-ctrl-alt-shift-j = 'move-node-to-monitor down'
 cmd-ctrl-alt-shift-k = 'move-node-to-monitor up'
 cmd-ctrl-alt-shift-l = 'move-node-to-monitor right'
 
+cmd-alt-h = 'move-workspace-to-monitor left'
+cmd-alt-j = 'move-workspace-to-monitor down'
+cmd-alt-k = 'move-workspace-to-monitor up'
+cmd-alt-l = 'move-workspace-to-monitor right'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 cmd-ctrl-tab = 'workspace-back-and-forth'
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
