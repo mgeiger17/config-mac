@@ -87,6 +87,11 @@ cmd-ctrl-j = 'focus down'
 cmd-ctrl-k = 'focus up'
 cmd-ctrl-l = 'focus right'
 
+cmd-ctrl-alt-h = 'focus-monitor left'
+cmd-ctrl-alt-j = 'focus-monitor down'
+cmd-ctrl-alt-k = 'focus-monitor up'
+cmd-ctrl-alt-l = 'focus-monitor right'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 cmd-ctrl-shift-h = 'move left'
 cmd-ctrl-shift-j = 'move down'
@@ -159,6 +164,11 @@ cmd-ctrl-shift-w = 'move-node-to-workspace W'
 cmd-ctrl-shift-x = 'move-node-to-workspace X'
 cmd-ctrl-shift-z = 'move-node-to-workspace Z'
 ctrl-shift-m ='fullscreen'
+
+cmd-ctrl-alt-shift-h = 'move-node-to-monitor left'
+cmd-ctrl-alt-shift-j = 'move-node-to-monitor down'
+cmd-ctrl-alt-shift-k = 'move-node-to-monitor up'
+cmd-ctrl-alt-shift-l = 'move-node-to-monitor right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 cmd-ctrl-tab = 'workspace-back-and-forth'
