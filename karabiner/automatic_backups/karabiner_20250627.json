@@ -12,19 +12,6 @@
                 },
                 "rules": [
                     {
-                        "description": "Disable Command + Tab",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "tab",
-                                    "modifiers": { "mandatory": ["left_command"] }
-                                },
-                                "to": [{ "key_code": "vk_none" }],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Remap Caps Lock to Ctrl when held, Esc when tapped",
                         "manipulators": [
                             {
@@ -308,6 +295,7 @@
                     },
                     {
                         "description": "Hyper Key sublayer w",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -534,7 +522,7 @@
                                     "key_code": "u",
                                     "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [{ "shell_command": "open -g rectangle://execute-action?name=restore" }],
+                                "to": [{ "shell_command": "open -g rectangle://execute-action?name=first-fourth" }],
                                 "type": "basic"
                             },
                             {

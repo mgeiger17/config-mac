@@ -308,6 +308,7 @@
                     },
                     {
                         "description": "Hyper Key sublayer w",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -534,7 +535,7 @@
                                     "key_code": "u",
                                     "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [{ "shell_command": "open -g rectangle://execute-action?name=restore" }],
+                                "to": [{ "shell_command": "open -g rectangle://execute-action?name=first-fourth" }],
                                 "type": "basic"
                             },
                             {
