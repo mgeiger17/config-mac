@@ -167,10 +167,10 @@ cmd-ctrl-shift-w = 'move-node-to-workspace W'
 
 ctrl-shift-m ='fullscreen'
 
-cmd-ctrl-alt-shift-h = 'move-node-to-monitor left'
-cmd-ctrl-alt-shift-j = 'move-node-to-monitor down'
-cmd-ctrl-alt-shift-k = 'move-node-to-monitor up'
-cmd-ctrl-alt-shift-l = 'move-node-to-monitor right'
+ctrl-shift-h = 'move-node-to-monitor left'
+ctrl-shift-j = 'move-node-to-monitor down'
+ctrl-shift-k = 'move-node-to-monitor up'
+ctrl-shift-l = 'move-node-to-monitor right'
 
 cmd-alt-h = 'move-workspace-to-monitor left'
 cmd-alt-j = 'move-workspace-to-monitor down'
