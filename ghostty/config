@@ -1,0 +1,18 @@
+
+# -- GENERAL
+
+# gtk-titlebar = false
+macos-titlebar-style = hidden
+background-opacity = 0.97
+
+# -- FONTS
+
+font-family = JetBrains Mono
+# font-family = SF Mono
+font-codepoint-map = U+F8FF=SF Mono
+
+# -- THEMES
+
+# theme = /Applications/Ghostty.app/Contents/Resources/ghostty/themes/catppuccin-mocha
+# theme = /Applications/Ghostty.app/Contents/Resources/ghostty/themes/Mathias
+theme = /Applications/Ghostty.app/Contents/Resources/ghostty/themes/Horizon
